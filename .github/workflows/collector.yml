@@ -1,0 +1,53 @@
+name: Collector
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        working-directory: scripts/collector
+        run: npm install
+
+      - name: Run tests
+        working-directory: scripts/collector
+        run: npm test
+
+      - name: Execute collector
+        working-directory: scripts/collector
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: npm run collect
+
+      - name: Commit and push data
+        run: |
+          git config user.name "find-house-bot"
+          git config user.email "actions@github.com"
+          if [[ -n "$(git status --porcelain data)" ]]; then
+            git add data
+            git commit -m "chore: update listings data"
+            git push
+          else
+            echo "No data changes"
+          fi

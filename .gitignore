@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+dist
+.vscode
+.env
+coverage
+*.log
+web/node_modules
+web/dist
+scripts/collector/node_modules
+scripts/collector/dist
+web/public/data
+web/public/config
