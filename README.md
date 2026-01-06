@@ -63,7 +63,10 @@ Pages principales :
 
 ## Déploiement GitHub Pages
 
-Le workflow `pages.yml` build l'app (`npm run build` dans `web/`) avec `BASE_PATH=/<repo>/` puis déploie via `actions/deploy-pages`. L'URL finale suit le format `https://<user>.github.io/<repo>/`.
+- URL cible : `https://<user>.github.io/<repo>/` (exemple demandé : https://mikka0808.github.io/Find-house/).
+- Activer GitHub Pages sur la branche `gh-pages` (gérée automatiquement par le workflow).
+- Le workflow `pages.yml` build l'app (`npm run build` dans `web/`) avec `BASE_PATH=/<repo>/` puis déploie via `actions/deploy-pages`.
+- Une page `web/public/404.html` assure la redirection SPA pour les routes profondes (`/listings`, `/sources`) sur GitHub Pages.
 
 ## Configuration des filtres
 
