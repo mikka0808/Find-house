@@ -1,0 +1,29 @@
+[
+  {
+    "id": "seloger_rss",
+    "name": "SeLoger (RSS démonstration)",
+    "type": "rss",
+    "url": "https://www.seloger.com/rss.xml",
+    "enabled": true,
+    "frequencyMinutes": 60,
+    "tags": ["national"]
+  },
+  {
+    "id": "leboncoin_api",
+    "name": "LeBonCoin API publique (exemple)",
+    "type": "json",
+    "url": "https://api.leboncoin.fr/fake-example.json",
+    "enabled": false,
+    "frequencyMinutes": 120,
+    "tags": ["placeholder"]
+  },
+  {
+    "id": "fallback_html",
+    "name": "HTML Best Effort",
+    "type": "html",
+    "url": "https://example.com/annonces.html",
+    "enabled": false,
+    "frequencyMinutes": 180,
+    "tags": ["html", "experimental"]
+  }
+]
